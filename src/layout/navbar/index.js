@@ -10,12 +10,13 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { DividerFont } from "../../components/atomes";
 import { RoundButton } from "../../components/atomes";
 
 const route = [
-  { title: "ผลงาน", icon: "fas fa-award", path: "work" },
+  { title: "ผลงาน", icon: "fas fa-award", path: "/" },
   { title: "เกี่ยวกับเรา", icon: "fas fa-user-alt", path: "about" },
 ];
 const useStyles = makeStyles({
@@ -30,8 +31,13 @@ const useStyles = makeStyles({
 });
 
 function Layout() {
+  const navigate = useNavigate();
   const classes = useStyles();
   const [isOpenMenu, setisOpenMenu] = useState(false);
+
+  const handleClick = (path) => {
+    navigate(path);
+  };
   const toggleDrawer = (value) => {
     setisOpenMenu(value);
   };
@@ -63,7 +69,7 @@ function Layout() {
       {route.map((r, i) => (
         <List key={i} disablePadding>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => handleClick(r.path)}>
               <Stack direction={"row"} alignItems={"center"} spacing={2}>
                 <Stack
                   width={"25px"}
@@ -82,7 +88,7 @@ function Layout() {
       <DividerFont>ช่องทางการติดต่อ</DividerFont>
       <List disablePadding>
         <ListItem disablePadding>
-          <ListItemButton disablePadding>
+          <ListItemButton disablePadding onClick={() => handleClick("contact")}>
             <Stack direction={"row"} alignItems={"center"} spacing={2}>
               <Stack
                 width={"25px"}
@@ -120,12 +126,16 @@ function Layout() {
             </Stack>
             <Stack alignItems={"center"} spacing={2} direction={"row"}>
               {route.map((r, i) => (
-                <RoundButton key={i}>{r.title}</RoundButton>
+                <RoundButton key={i} onClick={() => handleClick(r.path)}>
+                  {r.title}
+                </RoundButton>
               ))}
             </Stack>
           </Stack>
           <Stack>
-            <RoundButton>ช่องทางการติดต่อ</RoundButton>
+            <RoundButton onClick={() => handleClick("contact")}>
+              ช่องทางการติดต่อ
+            </RoundButton>
           </Stack>
         </Stack>
         <Stack
