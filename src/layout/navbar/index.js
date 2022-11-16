@@ -110,7 +110,7 @@ function Layout() {
               >
                 <i className={`${classes.icon_sidebar} fab fa-line`} />
               </Stack>
-              <ListItemText primary={"plutoeiei"} />
+              <ListItemText primary={"Plutojaidee"} />
             </Stack>
           </ListItemButton>
         </ListItem>
