@@ -12,8 +12,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { DividerFont } from "../../components/atomes";
-import { RoundButton } from "../../components/atomes";
+import { DividerFont } from "../../components/atomes/CustomComponents";
+import { RoundButton } from "../../components/atomes/CustomComponents";
+import Typography from "@mui/material/Typography";
 
 const route = [
   { title: "ผลงาน", icon: "fas fa-award", path: "/" },
@@ -27,6 +28,12 @@ const useStyles = makeStyles({
   },
   icon_sidebar: {
     fontSize: "25px",
+  },
+  logo_web: {
+    cursor: "pointer",
+  },
+  no_padding: {
+    padding: "0px !important",
   },
 });
 
@@ -58,7 +65,12 @@ function Layout() {
       onClick={() => toggleDrawer(false)}
       onKeyDown={() => toggleDrawer(false)}
     >
-      <Stack direction={"row"} justifyContent={"center"}>
+      <Stack
+        direction={"row"}
+        justifyContent={"center"}
+        className={classes.logo_web}
+        onClick={() => handleClick("/")}
+      >
         <Avatar
           alt="Remy Sharp"
           sx={{ width: "100px", height: "100px", margin: "20px" }}
@@ -67,8 +79,8 @@ function Layout() {
       </Stack>
       <DividerFont>เมนู</DividerFont>
       {route.map((r, i) => (
-        <List key={i} disablePadding>
-          <ListItem disablePadding>
+        <List key={i} className={classes.no_padding}>
+          <ListItem className={classes.no_padding}>
             <ListItemButton onClick={() => handleClick(r.path)}>
               <Stack direction={"row"} alignItems={"center"} spacing={2}>
                 <Stack
@@ -86,9 +98,9 @@ function Layout() {
         </List>
       ))}
       <DividerFont>ช่องทางการติดต่อ</DividerFont>
-      <List disablePadding>
-        <ListItem disablePadding>
-          <ListItemButton disablePadding onClick={() => handleClick("contact")}>
+      <List className={classes.no_padding}>
+        <ListItem className={classes.no_padding}>
+          <ListItemButton onClick={() => handleClick("contact")}>
             <Stack direction={"row"} alignItems={"center"} spacing={2}>
               <Stack
                 width={"25px"}
@@ -98,7 +110,7 @@ function Layout() {
               >
                 <i className={`${classes.icon_sidebar} fab fa-line`} />
               </Stack>
-              <ListItemText primary={"plutoeiei"} />
+              <ListItemText primary={"Plutojaidee"} />
             </Stack>
           </ListItemButton>
         </ListItem>
@@ -117,12 +129,13 @@ function Layout() {
         >
           <Stack direction={"row"} spacing={2}>
             <Stack direction={"row"} alignItems={"center"}>
-              {/* <Avatar
-                alt="Logo"
-                sx={{ width: "50px", height: "50px" }}
-                src="/img/Logo_EYE.jpg"
-              /> */}
-              PRAMYUDA
+              <Typography
+                variant="h6"
+                className={classes.logo_web}
+                onClick={() => handleClick("/")}
+              >
+                PRAMYUDA
+              </Typography>
             </Stack>
             <Stack alignItems={"center"} spacing={2} direction={"row"}>
               {route.map((r, i) => (
@@ -145,12 +158,11 @@ function Layout() {
           display={{ md: "none" }}
           spacing={2}
         >
-          <Stack direction={"row"} alignItems={"center"}>
-            {/* <Avatar
-                alt="Logo"
-                sx={{ width: "50px", height: "50px" }}
-                src="/img/Logo_EYE.jpg"
-              /> */}
+          <Stack
+            direction={"row"}
+            alignItems={"center"}
+            className={classes.logo_web}
+          >
             PRAMYUDA
           </Stack>
           <Stack>
