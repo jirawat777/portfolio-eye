@@ -5,6 +5,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/homepage";
 import AboutPage from "./pages/aboutpage";
 import ContactPage from "./pages/contactpage";
+import { makeStyles } from "@mui/styles";
+import Stack from "@mui/material/Stack";
 
 function NoMatch() {
   return (
@@ -17,8 +19,15 @@ function NoMatch() {
     </div>
   );
 }
-
+const useStyles = makeStyles({
+  display_content: {
+    margin: "8px",
+    height: "90vh",
+    overflowY: "auto",
+  },
+});
 function App() {
+  const classes = useStyles();
   const theme = createTheme({
     typography: {
       fontFamily: ["Noto Sans Thai"].join(","),
@@ -28,14 +37,16 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Layout />
-      <Routes>
-        <Route>
-          <Route index element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NoMatch />} />
-        </Route>
-      </Routes>
+      <Stack className={classes.display_content}>
+        <Routes>
+          <Route>
+            <Route index element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NoMatch />} />
+          </Route>
+        </Routes>
+      </Stack>
     </ThemeProvider>
   );
 }
